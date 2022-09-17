@@ -1,0 +1,16 @@
+includes:
+    - vendor/symplify/phpstan-rules/config/symplify-rules.neon
+
+parameters:
+    level: max
+
+    checkGenericClassInNonGenericObjectType: false
+
+    paths:
+        - config
+        - src
+        - tests
+
+    excludePaths:
+        - */Source/*
+        - *Source/*
