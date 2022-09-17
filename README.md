@@ -1,6 +1,6 @@
-# Rector Rules for PHP Office
+# Rector Rules for PHPParser
 
-See available [PHP Office rules](/docs/rector_rules_overview.md)
+See available [PHPParser rules](/docs/rector_rules_overview.md)
 
 ## Install
 
@@ -14,15 +14,15 @@ composer require rector/rector --dev
 
 ## Use Sets
 
-To add a set to your config, use `Rector\PHPOffice\Set\PHPOfficeSetList` class and pick one of constants:
+To add a set to your config, use `Rector\PhpParser\Set\PhpParserSetList` class and pick one of constants:
 
 ```php
-use Rector\PHPOffice\Set\PHPOfficeSetList;
+use Rector\PhpParser\Set\PhpParserSetList;
 use Rector\Config\RectorConfig;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->sets([
-        PHPOfficeSetList::PHPEXCEL_TO_PHPSPREADSHEET
+        PhpParserSetList::PHP_PARSER_50
     ]);
 };
 ```
