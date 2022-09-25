@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
+use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
 use Rector\Renaming\Rector\Name\RenameClassRector;
+use Rector\Renaming\ValueObject\RenameClassAndConstFetch;
 
 /**
  * @see https://github.com/nikic/PHP-Parser/blob/master/UPGRADE-5.0.md
@@ -29,4 +31,45 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     // https://github.com/nikic/PHP-Parser/blob/master/UPGRADE-5.0.md#modifiers
+    $rectorConfig->ruleWithConfiguration(RenameClassConstFetchRector::class, [
+        new RenameClassAndConstFetch(
+            'PhpParser\Node\Stmt\Class_',
+            'MODIFIER_PUBLIC',
+            'PhpParser\Modifiers',
+            'PUBLIC'
+        ),
+        new RenameClassAndConstFetch('PhpParser\Node\Stmt\Class_', 'MODIFIER_PUBLIC', 'PhpParser\Modifiers', 'PUBLIC'),
+        new RenameClassAndConstFetch(
+            'PhpParser\Node\Stmt\Class_',
+            'MODIFIER_PROTECTED',
+            'PhpParser\Modifiers',
+            'PROTECTED'
+        ),
+        new RenameClassAndConstFetch(
+            'PhpParser\Node\Stmt\Class_',
+            'MODIFIER_PRIVATE',
+            'PhpParser\Modifiers',
+            'PRIVATE'
+        ),
+        new RenameClassAndConstFetch('PhpParser\Node\Stmt\Class_', 'MODIFIER_STATIC', 'PhpParser\Modifiers', 'STATIC'),
+        new RenameClassAndConstFetch(
+            'PhpParser\Node\Stmt\Class_',
+            'MODIFIER_ABSTRACT',
+            'PhpParser\Modifiers',
+            'ABSTRACT'
+        ),
+        new RenameClassAndConstFetch('PhpParser\Node\Stmt\Class_', 'MODIFIER_FINAL', 'PhpParser\Modifiers', 'FINAL'),
+        new RenameClassAndConstFetch(
+            'PhpParser\Node\Stmt\Class_',
+            'MODIFIER_READONLY',
+            'PhpParser\Modifiers',
+            'READONLY'
+        ),
+        new RenameClassAndConstFetch(
+            'PhpParser\Node\Stmt\Class_',
+            'VISIBILITY_MODIFIER_MASK',
+            'PhpParser\Modifiers',
+            'VISIBILITY_MASK'
+        ),
+    ]);
 };
