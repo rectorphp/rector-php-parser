@@ -17,5 +17,10 @@ return static function (RectorConfig $rectorConfig): void {
         StringClassNameToClassConstantRector::class => [__DIR__ . '/config'],
     ]);
 
+    $rectorConfig->ruleWithConfiguration(StringClassNameToClassConstantRector::class, [
+        'PhpParser\PhpVersion',
+        'PhpParser\ParserFactory',
+    ]);
+
     $rectorConfig->parallel();
 };
