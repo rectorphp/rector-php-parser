@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
+use Rector\Renaming\Rector\MethodCall\RenameMethodRector;
 use Rector\Renaming\Rector\Name\RenameClassRector;
+use Rector\Renaming\ValueObject\MethodCallRename;
 use Rector\Renaming\ValueObject\RenameClassAndConstFetch;
 
 /**
@@ -71,5 +73,10 @@ return static function (RectorConfig $rectorConfig): void {
             'PhpParser\Modifiers',
             'VISIBILITY_MASK'
         ),
+    ]);
+
+    // https://github.com/nikic/PHP-Parser/blob/master/UPGRADE-5.0.md#other-removed-functionality
+    $rectorConfig->ruleWithConfiguration(RenameMethodRector::class, [
+        new MethodCallRename('PhpParser\Node\Expr\MethodCall', 'setTypeHint', 'setType'),
     ]);
 };
