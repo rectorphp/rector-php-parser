@@ -14,5 +14,8 @@ parameters:
         - *Source/*
 
     ignoreErrors:
-         - '#Parameter (.*?) of method (.*?)\:\:refactor\(\) should be contravariant with parameter \$node \(PhpParser\\Node\) of method Rector\\Core\\Contract\\Rector\\PhpRectorInterface\:\:refactor\(\)#'
+        - '#Parameter (.*?) of method (.*?)\:\:refactor\(\) should be contravariant with parameter \$node \(PhpParser\\Node\) of method Rector\\Core\\Contract\\Rector\\PhpRectorInterface\:\:refactor\(\)#'
 
+        -
+            message: '#Attribute must have all names explicitly defined#'
+            path: 'tests/*'
