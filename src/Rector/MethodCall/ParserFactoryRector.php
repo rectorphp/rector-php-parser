@@ -12,7 +12,8 @@ use PhpParser\Node\Identifier;
 use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Scalar\String_;
 use PHPStan\Type\ObjectType;
-use Rector\Core\Rector\AbstractRector;
+use Rector\PhpParser\Node\Value\ValueResolver;
+use Rector\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -23,6 +24,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class ParserFactoryRector extends AbstractRector
 {
+    public function __construct(
+        private readonly ValueResolver $valueResolver
+    ) {
+    }
+
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition('Upgrade ParserFactory create() method', [
@@ -71,14 +77,14 @@ CODE_SAMPLE
         $args = $node->getArgs();
 
         $value = $this->valueResolver->getValue($args[0]->value);
-        if ($value === 1) {
+        if ($value === 1 || $value === 'PhpParser\ParserFactory::PREFER_PHP7') {
             $node->name = new Identifier('createForNewestSupportedVersion');
             $node->args = [];
 
             return $node;
         }
 
-        if ($value === 4) {
+        if ($value === 4 || $value === 'PhpParser\ParserFactory::ONLY_PHP5') {
             $node->name = new Identifier('createForVersion');
             $fullyQualified = new FullyQualified('PhpParser\PhpVersion');
 
