@@ -4,12 +4,10 @@ See available [PHPParser rules](/docs/rector_rules_overview.md)
 
 ## Install
 
-This package is already part of [rector/rector](http://github.com/rectorphp/rector) package, so it works out of the box.
-
-All you need to do is install the main package, and you're good to go:
+You can install this package with composer:
 
 ```bash
-composer require rector/rector --dev
+composer require rector/rector-php-parser:dev-main --dev
 ```
 
 ## Use Sets
